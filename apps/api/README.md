@@ -6,7 +6,7 @@ This FastAPI service provides endpoints for pricing power purchase agreements. I
 
 ```bash
 cd apps/api
-uv sync --dev
+uv sync --dev --extra dev
 uv run uvicorn api.main:app --reload
 ```
 

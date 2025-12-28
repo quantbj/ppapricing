@@ -18,9 +18,9 @@ Install dependencies (requires internet access):
 # JavaScript
 pnpm install
 
-# Python
+# Python (installs dev tools like Ruff and pytest)
 cd apps/api
-uv sync --dev
+uv sync --dev --extra dev
 ```
 
 ## Development scripts

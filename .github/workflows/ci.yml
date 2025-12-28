@@ -23,7 +23,7 @@ jobs:
 
       - name: Install API dependencies
         working-directory: apps/api
-        run: uv sync --dev
+        run: uv sync --dev --extra dev
 
       - name: Lint API
         working-directory: apps/api
