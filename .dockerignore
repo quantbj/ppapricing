@@ -1,0 +1,10 @@
+node_modules
+.pnpm-store
+.venv
+.uv
+__pycache__
+*.pyc
+.git
+.gitignore
+.DS_Store
+.env
