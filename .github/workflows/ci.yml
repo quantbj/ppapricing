@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+
+      - name: Install API dependencies
+        working-directory: apps/api
+        run: uv sync --dev
+
+      - name: Lint API
+        working-directory: apps/api
+        run: uv run ruff check .
+
+      - name: Test API
+        working-directory: apps/api
+        run: uv run pytest
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install JavaScript dependencies
+        run: pnpm install
+
+      - name: Lint web
+        run: pnpm lint
+
+      - name: Test web
+        run: pnpm test
